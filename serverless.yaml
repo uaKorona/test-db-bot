@@ -1,0 +1,33 @@
+{
+  service: "test-db-bot",
+  frameworkVersion: "3",
+
+  package: {
+    excludeDevDependencies: true,
+  },
+
+  provider: {
+    name: "aws",
+    runtime: "nodejs16.x",
+    region: "eu-west-1"
+  },
+
+  plugins: [
+    "serverless-plugin-typescript"
+  ],
+
+  functions: {
+    testDbBot: {
+      name: "test-db-bot",
+      handler: "handler.botHandler",
+      events: [
+        {
+          httpApi: {
+            path: "/telegraf",
+            method: "post",
+          },
+        },
+      ],
+    },
+  },
+}
